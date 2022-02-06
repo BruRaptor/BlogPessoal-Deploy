@@ -26,38 +26,42 @@ public class UsuarioControllerTest {
 
 	@Autowired
 	private TestRestTemplate testRestTemplate;
-	
+
 	@Autowired
-	private UsuarioService usuarioService;
-	
+	private UsuarioService service;
+
 	@Test
 	@Order(1)
 	@DisplayName("Cadastrar um Usuário")
 	public void deveCriarUmUsuario() {
-		HttpEntity<Usuario> requisicao = new HttpEntity<Usuario>(new Usuario(0L,
-				"Sarah Ribeiro", "sarah@email.com", "123456789"));
-		ResponseEntity<Usuario> resposta = testRestTemplate.exchange
-				("/usuarios/cadastrar", HttpMethod.POST, requisicao, Usuario.class);
-		
+		HttpEntity<Usuario> requisicao = new HttpEntity<Usuario>(new Usuario(0L, "Sarah Ribeiro",
+				"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Sunset_in_Manaus.jpg/640px-Sunset_in_Manaus.jpg",
+				"sarah@email.com", "123456789"));
+		ResponseEntity<Usuario> resposta = testRestTemplate.exchange("/usuarios/cadastrar", HttpMethod.POST, requisicao,
+				Usuario.class);
+
 		assertEquals(HttpStatus.CREATED, resposta.getStatusCode());
 		assertEquals(requisicao.getBody().getNome(), requisicao.getBody().getNome());
 		assertEquals(requisicao.getBody().getUsuario(), resposta.getBody().getUsuario());
 	}
-	
+
 	@Test
 	@Order(2)
 	@DisplayName("Não deve permitir duplicação fo Usuário")
-	public void naoDeveDuplicarUsuario( ) {
-		
-		usuarioService.CadastrarUsuario(new Usuario(0L, "Amanda Ribeiro", "amanda@email.com.br", "123456789"));
-		
+	public void naoDeveDuplicarUsuario() {
+
+		service.cadastrarUsuario(new Usuario(0L, "Amanda Ribeiro",
+				"https://t.ctcdn.com.br/Uaa77l8Hm-2iSaypSQIPQwd4lic=/512x288/smart/i422804.png", "amanda@email.com.br",
+				"123456789"));
+
 		HttpEntity<Usuario> requisicao = new HttpEntity<Usuario>(new Usuario(0L,
-				"Amanda Ribeiro", "amanda@email.com.br", "123456789"));
-		
+				"Amanda Ribeiro", "https://t.ctcdn.com.br/Uaa77l8Hm-2iSaypSQIPQwd4lic=/512x288/smart/i422804.png",
+				"amanda@email.com.br", "123456789"));
+
 		ResponseEntity<Usuario> resposta = testRestTemplate
 				.exchange("/usuarios/cadastrar", HttpMethod.POST, requisicao, Usuario.class);
-		
+
 		assertEquals(HttpStatus.UNAUTHORIZED, resposta.getStatusCode());
 	}
-	
+
 }

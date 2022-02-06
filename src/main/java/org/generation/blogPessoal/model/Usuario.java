@@ -1,6 +1,5 @@
 package org.generation.blogPessoal.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,49 +18,56 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity
-@Table(name = "tb_usuario")
+@Table(name = "tb_usuarios")
 public class Usuario {
-	
-	//Primeiro Método Construtor - Com atributos
-	
-    public Usuario(long id, String nome,String usuario,String senha) {
-		this.id = id;
-		this.nome = nome;
-		this.usuario = usuario;
-		this.senha = senha;
-	}
-    
-  //Primeiro Método Construtor - Sem atributos
-    public Usuario() { }
-    
-	@Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
-    @Size(min = 2, max = 100)
+    @NotNull(message = "O atributo Nome é Obrigatório!")
+    @Size(min = 2)
     private String nome;
-    
+
     @Schema(example = "email@mail.com.br")
-    @NotNull (message = "O atributo Usuário é Obrigatótio!")
+    @NotNull(message = "O atributo Usuário é Obrigatótio!")
     @Email(message = "O atributo Usuário deve ser um email válido!")
     @Size(min = 5, max = 100)
     private String usuario;
-    
-    @NotNull
-    @Size(min = 5, max =100)
+
+    @Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres")
+
+    private String foto;
+
+    @NotNull(message = "O atributo Senha é Obrigatório!")
+    @Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres")
     private String senha;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("usuario")
-	private List<Postagem> postagens = new ArrayList<>();
+    @JsonIgnoreProperties("usuario")
+    private List<Postagem> postagem;
+
+    // Primeiro Método Construtor - Com atributos
+
+    public Usuario(long id, String nome, String usuario, String foto, String senha) {
+        this.id = id;
+        this.nome = nome;
+        this.usuario = usuario;
+        this.foto = foto;
+        this.senha = senha;
+    }
+
+    // Primeiro Método Construtor - Sem atributos
+
+    public Usuario() {
+    }
 
     public List<Postagem> getPostagens() {
-        return this.postagens;
+        return this.postagem;
     }
 
     public void setPostagens(List<Postagem> postagens) {
-        this.postagens = postagens;
+        this.postagem = postagens;
     }
 
     public long getId() {
@@ -94,6 +100,22 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getFoto() {
+        return this.foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public List<Postagem> getPostagem() {
+        return this.postagem;
+    }
+
+    public void setPostagem(List<Postagem> postagem) {
+        this.postagem = postagem;
     }
 
 }

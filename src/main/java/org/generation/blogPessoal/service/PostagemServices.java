@@ -1,4 +1,5 @@
 package org.generation.blogPessoal.service;
+
 import org.apache.commons.codec.binary.Base64;
 import org.generation.blogPessoal.repository.PostagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +11,15 @@ public class PostagemServices {
 
     private @Autowired PostagemRepository repositoryP;
 
-    private static String[] getUserInToken(String token){
+    private static String[] getUserInToken(String token) {
         byte[] decode = Base64.decodeBase64(token);
         String decodeString = new String(decode);
-        return decodeString.split(":"); 
+        return decodeString.split(":");
     }
 
     public ResponseEntity deleteByIdToken(long id, String token) {
-        
-         String[] result = getUserInToken(token);
+
+        String[] result = getUserInToken(token);
 
         return repositoryP.findById(id).map(resp -> {
             if (resp.getUsuario().getUsuario().equals(result[0])) {
@@ -27,10 +28,8 @@ public class PostagemServices {
             } else {
                 return ResponseEntity.status(401).build();
             }
-            
+
         }).orElse(ResponseEntity.status(404).build());
     }
-
-
 
 }

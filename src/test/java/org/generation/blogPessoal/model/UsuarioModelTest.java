@@ -19,15 +19,17 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class UsuarioModelTest {
 
-public Usuario usuario;
-	
+	public Usuario usuario;
+
 	@Autowired
-	private  ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+	private ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 	Validator validator = factory.getValidator();
-	
+
 	@BeforeEach
 	public void start() {
-		usuario = new Usuario(0L, "BruTech", "Bruno Tester", "123456789");
+		usuario = new Usuario(0L, "BruTech",
+				"https://conteudo.imguol.com.br/c/noticias/67/2020/01/31/astronauta-no-espaco-1580492800551_v2_1x1.jpg",
+				"Bruno Tester", "123456789");
 	}
 
 	@Test
@@ -36,7 +38,7 @@ public Usuario usuario;
 		System.out.println(valida.toString());
 		assertTrue(valida.isEmpty());
 	}
-	
+
 	@Test
 	void testValidaAtributosNulos() {
 		Usuario usuarioErro = new Usuario();
