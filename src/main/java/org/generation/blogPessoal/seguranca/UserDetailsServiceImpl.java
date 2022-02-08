@@ -26,4 +26,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		} else {
 			throw new UsernameNotFoundException("Usuario não existe");
 		}
+    }
 }
