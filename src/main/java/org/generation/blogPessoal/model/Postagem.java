@@ -41,6 +41,8 @@ public class Postagem {
 	@JsonIgnoreProperties("postagem")
 	private Usuario usuario;
 
+	// Getters and Setters
+	
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

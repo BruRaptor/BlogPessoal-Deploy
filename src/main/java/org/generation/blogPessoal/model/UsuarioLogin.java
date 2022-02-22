@@ -14,6 +14,10 @@ public class UsuarioLogin {
 
     private String token;
 
+    private String Tipo; // Adicionado para usuário adm ou normal.
+
+    // Getters and Setters
+
     public String getNome() {
         return this.nome;
     }
@@ -60,6 +64,14 @@ public class UsuarioLogin {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public String getTipo() {
+        return this.Tipo;
+    }
+
+    public void setTipo(String Tipo) {
+        this.Tipo = Tipo;
     }
 
 }

@@ -35,8 +35,9 @@ public class Usuario {
     @Size(min = 5, max = 100)
     private String usuario;
 
-    @Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres")
+    private String tipo; // Adicionado para usuário adm ou normal.
 
+    @Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres")
     private String foto;
 
     @NotNull(message = "O atributo Senha é Obrigatório!")
@@ -61,6 +62,8 @@ public class Usuario {
 
     public Usuario() {
     }
+
+    // Getters and Setters
 
     public List<Postagem> getPostagens() {
         return this.postagem;
@@ -100,6 +103,14 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getTipo() {
+        return this.tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getFoto() {

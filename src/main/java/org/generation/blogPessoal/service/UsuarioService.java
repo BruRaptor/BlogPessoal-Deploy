@@ -46,8 +46,8 @@ public class UsuarioService {
                 usuarioLogin.get().setId(usuario.get().getId());
                 usuarioLogin.get().setNome(usuario.get().getNome());
                 usuarioLogin.get().setFoto(usuario.get().getFoto());
-                usuarioLogin.get()
-                        .setToken(generatorBasicToken(usuarioLogin.get().getUsuario(), usuarioLogin.get().getSenha()));
+                usuarioLogin.get().setTipo(usuario.get().getTipo());
+                usuarioLogin.get().setToken(generatorBasicToken(usuarioLogin.get().getUsuario(),usuarioLogin.get().getSenha()));
                 usuarioLogin.get().setSenha(usuario.get().getSenha());
                 return usuarioLogin;
             }
@@ -68,6 +68,7 @@ public class UsuarioService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.matches(senhaDigitada, senhaBanco);
     }
+
     private String generatorBasicToken(String email, String password) {
         String structure = email + ":" + password;
         byte[] structureBase64 = Base64.encodeBase64(structure.getBytes(Charset.forName("US-ASCII")));
