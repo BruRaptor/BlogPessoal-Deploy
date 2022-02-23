@@ -65,14 +65,6 @@ public class Usuario {
 
     // Getters and Setters
 
-    public List<Postagem> getPostagens() {
-        return this.postagem;
-    }
-
-    public void setPostagens(List<Postagem> postagens) {
-        this.postagem = postagens;
-    }
-
     public long getId() {
         return this.id;
     }
@@ -97,14 +89,6 @@ public class Usuario {
         this.usuario = usuario;
     }
 
-    public String getSenha() {
-        return this.senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     public String getTipo() {
         return this.tipo;
     }
@@ -121,6 +105,14 @@ public class Usuario {
         this.foto = foto;
     }
 
+    public String getSenha() {
+        return this.senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
     public List<Postagem> getPostagem() {
         return this.postagem;
     }
@@ -128,5 +120,5 @@ public class Usuario {
     public void setPostagem(List<Postagem> postagem) {
         this.postagem = postagem;
     }
-
+    
 }
