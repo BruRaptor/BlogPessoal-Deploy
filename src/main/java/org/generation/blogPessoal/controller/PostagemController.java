@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/postagens")
@@ -93,7 +94,7 @@ public class PostagemController {
 
 		if (post.isEmpty())
 
-			/* throw new ResponseStatusException(HttpStatus.BAD_REQUEST); */
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 
 			repository.deleteById(id);
 
